@@ -9,8 +9,8 @@ class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
 
     def start_requests(self):
-        for page in range(1,5):
-            yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?currency=BRL&filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=100&currency=CNY' % page,callback=self.parse)
+        for page in range(1,25):
+            yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse)
 
     def parse(self, response):
         data = json.loads(response.text)
