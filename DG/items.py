@@ -54,10 +54,11 @@ class SavecoinsItem(scrapy.Item):
                 discount_begin,
                 discount_end,
                 spider_time,
-                percentOff
+                percentOff,
+                image_url
                 )
                 VALUES
-                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         '''
         
         add_data = [
@@ -76,7 +77,8 @@ class SavecoinsItem(scrapy.Item):
             datetime.strptime(item.get('discountBeginsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z'),
             datetime.strptime(item.get('discountEndsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z'),
             datetime.now(),
-            item.get('percentOff',None)
+            item.get('percentOff',None),
+            item.get('imageUrl',None)
         ]
         # datetime.strptime(item['discountBeginsAt'],'%Y-%m-%dT%H:%M:%S'),datetime.strptime(item['discountEndsAt'],'%Y-%m-%dT%H:%M:%S')
         return add_sql, add_data
