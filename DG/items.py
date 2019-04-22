@@ -80,7 +80,6 @@ class SavecoinsItem(scrapy.Item):
             item.get('percentOff',None),
             item.get('imageUrl',None)
         ]
-        # datetime.strptime(item['discountBeginsAt'],'%Y-%m-%dT%H:%M:%S'),datetime.strptime(item['discountEndsAt'],'%Y-%m-%dT%H:%M:%S')
         return add_sql, add_data
 
 
