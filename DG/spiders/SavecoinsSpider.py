@@ -18,6 +18,7 @@ class SavecoinsSpider(scrapy.Spider):
         game_data = data['data']
         for d in game_data:
             sc = GAME_INFO()
+            sc['data_source'] = self.name
             sc['platform'] = d['platform']
             sc['title'] = d['title']
             sc['releaseDateDisplay'] = d['releaseDateDisplay']

@@ -17,6 +17,7 @@ class JumpSpider(scrapy.Spider):
         games = data.data.games
         for game in games:
             sc = GAME_INFO()
+            sc['data_source'] = self.name
             sc['platform'] = 'switch'
             sc['title'] = game['title']
             # TODO 需要继续完善游戏数据

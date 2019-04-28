@@ -36,7 +36,7 @@ class GAME_INFO(scrapy.Item):
     discountBeginsAt = scrapy.Field() # 折扣开始时间
     discountEndsAt = scrapy.Field() # 折扣结束时间
     percentOff = scrapy.Field() # 折扣率
-
+    data_source = scrapy.Field() # 数据来源
     def save(self,item):
         add_sql = '''
             INSERT INTO GAME_INFO (
@@ -57,10 +57,11 @@ class GAME_INFO(scrapy.Item):
                 discount_end,
                 spider_time,
                 percentOff,
-                image_url
+                image_url,
+                data_source
                 )
                 VALUES
-                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         '''
         
         add_data = [
@@ -81,7 +82,8 @@ class GAME_INFO(scrapy.Item):
             datetime.strptime(item.get('discountEndsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z'),
             datetime.now(),
             item.get('percentOff',None),
-            item.get('imageUrl',None)
+            item.get('imageUrl',None),
+            item.get('data_source',None),
         ]
         return add_sql, add_data
 
