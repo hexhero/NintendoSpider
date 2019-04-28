@@ -13,4 +13,4 @@
 * 平台：JUMP
 * 爬去条件
     1. 特价
-    2. https://switch.vgjump.com/switch/gameDlc/list?ifDiscount=true&all=true&offset=1&limit=3
+    2. https://switch.vgjump.com/switch/gameDlc/list?ifDiscount=true&all=true&offset=1&limit=10

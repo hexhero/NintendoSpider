@@ -9,11 +9,12 @@ import scrapy
 import time
 from datetime import datetime, timedelta
 
-class SavecoinsItem(scrapy.Item):
+class GAME_INFO(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     platform = scrapy.Field() # 平台
     title = scrapy.Field() # 名称
+    title_zh = scrapy.Field() #中午名称
     releaseDateDisplay = scrapy.Field() # 发行日期
     imageUrl = scrapy.Field() # 图片地址
     # price_info 价格信息
@@ -41,6 +42,7 @@ class SavecoinsItem(scrapy.Item):
             INSERT INTO GAME_INFO (
                 platform,
                 title,
+                title_zh,
                 release_date,
                 best_price,
                 current_price,
@@ -64,6 +66,7 @@ class SavecoinsItem(scrapy.Item):
         add_data = [
             item['platform'],
             item['title'],
+            item.get('title_zh', None),
             datetime.strptime(item['releaseDateDisplay'],'%Y-%m-%d'),
             item['best_price'],
             item.get('rawCurrentPrice',None),

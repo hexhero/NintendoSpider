@@ -3,7 +3,7 @@
 
 import scrapy
 import json
-from DG.items import SavecoinsItem
+from DG.items import GAME_INFO
 
 class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
@@ -17,7 +17,7 @@ class SavecoinsSpider(scrapy.Spider):
         data = json.loads(response.text)
         game_data = data['data']
         for d in game_data:
-            sc = SavecoinsItem()
+            sc = GAME_INFO()
             sc['platform'] = d['platform']
             sc['title'] = d['title']
             sc['releaseDateDisplay'] = d['releaseDateDisplay']
