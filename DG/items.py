@@ -6,7 +6,6 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
-import time
 from datetime import datetime, timedelta
 
 class GAME_INFO(scrapy.Item):
@@ -65,25 +64,25 @@ class GAME_INFO(scrapy.Item):
         '''
         
         add_data = [
-            item['platform'],
-            item['title'],
-            item.get('title_zh', None),
-            datetime.strptime(item['releaseDateDisplay'],'%Y-%m-%d'),
-            item['best_price'],
-            item.get('rawCurrentPrice',None),
-            item['status'],
-            item['url_eshop'],
-            item['hasDiscount'],
-            item['country_code'],
-            item['country_name'],
-            item['rawRegularPrice'],
-            item.get('rawDiscountPrice',None),
-            datetime.strptime(item.get('discountBeginsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z'),
-            datetime.strptime(item.get('discountEndsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z'),
+            item.get('platform'),
+            item.get('title'),
+            item.get('title_zh'),
+            item.get('releaseDateDisplay'),
+            item.get('best_price'),
+            item.get('rawCurrentPrice'),
+            item.get('status'),
+            item.get('url_eshop'),
+            item.get('hasDiscount'),
+            item.get('country_code'),
+            item.get('country_name'),
+            item.get('rawRegularPrice'),
+            item.get('rawDiscountPrice'),
+            item.get('discountBeginsAt'),
+            item.get('discountEndsAt'),
             datetime.now(),
-            item.get('percentOff',None),
-            item.get('imageUrl',None),
-            item.get('data_source',None),
+            item.get('percentOff'),
+            item.get('imageUrl'),
+            item.get('data_source'),
         ]
         return add_sql, add_data
 

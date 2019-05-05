@@ -4,6 +4,7 @@
 import scrapy
 import json
 from DG.items import GAME_INFO
+from datetime import datetime, timedelta
 
 class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
@@ -21,7 +22,7 @@ class SavecoinsSpider(scrapy.Spider):
             sc['data_source'] = self.name
             sc['platform'] = d['platform']
             sc['title'] = d['title']
-            sc['releaseDateDisplay'] = d['releaseDateDisplay']
+            sc['releaseDateDisplay'] = datetime.strptime(d['releaseDateDisplay'],'%Y-%m-%d')
             sc['imageUrl'] = d['imageUrl']
             price_info = d.get("price_info",False)
             if price_info:
@@ -43,8 +44,8 @@ class SavecoinsSpider(scrapy.Spider):
                 if discountPrice:
                     sc['rawDiscountPrice'] = discountPrice['rawDiscountPrice']
                     sc['discountPrice'] = discountPrice['discountPrice']
-                    sc['discountBeginsAt'] = discountPrice['discountBeginsAt']
-                    sc['discountEndsAt'] = discountPrice['discountEndsAt']
+                    sc['discountBeginsAt'] = datetime.strptime(discountPrice.get('discountBeginsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z')
+                    sc['discountEndsAt'] = datetime.strptime(discountPrice.get('discountEndsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z')
                     sc['percentOff'] = discountPrice['percentOff']
             yield sc
 
