@@ -1,5 +1,8 @@
 # 说明文档
 
+## 环境依赖
+* `scrapy` `datetime` `mysql-conllector` `json`
+
 ## 爬虫信息
 
 * 平台：`https://savecoins.app`
