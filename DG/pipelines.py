@@ -34,7 +34,7 @@ class DgPipeline(object):
             if item['title']:
                 cursor.execute('SELECT count(1) FROM yhh_game.game where title=%s',[item['title']])
                 count = cursor.fetchone()
-                if count == 0:
+                if count[0] == 0:
                     print("-> 新增游戏信息")
                     cursor.execute(''' 
                         insert into game
