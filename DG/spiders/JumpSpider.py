@@ -10,7 +10,7 @@ class JumpSpider(scrapy.Spider):
     name = "jump"
     
     def start_requests(self):
-        for page in range(1,50):
+        for page in range(1,30):
             yield scrapy.Request(url='https://switch.vgjump.com/switch/gameDlc/list?ifDiscount=true&all=true&offset=%d&limit=10' % (page*10), callback=self.parse)
 
     def parse(self, response):
