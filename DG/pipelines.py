@@ -41,9 +41,9 @@ class DgPipeline(object):
                     print("-> 新增游戏信息")
                     cursor.execute(''' 
                         insert into game
-                            (country_code,country_name,platform,title,title_zh,url_eshop,regular_price,discount_price,discount_begin,discount_end,spider_time,percentOff,image_url,status) 
+                            (country_code,country_name,platform,title,title_zh,url_eshop,regular_price,discount_price,discount_begin,discount_end,spider_time,percentOff,image_url,status,prices) 
                             values 
-                            (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,2)                           
+                            (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,2,%s)                           
                         ''',
                         [
                             item.get('country_code'),
@@ -58,7 +58,8 @@ class DgPipeline(object):
                             item.get('discountEndsAt'),
                             datetime.now(),
                             item.get('percentOff'),
-                            item.get('imageUrl')
+                            item.get('imageUrl'),
+                            item.get('prices')
                         ]
                     )
                 else:
@@ -67,7 +68,7 @@ class DgPipeline(object):
                         cursor.execute(
                             '''
                                 update yhh_game.game 
-                                    set regular_price=%s, discount_price=%s, discount_end=%s,spider_time=%s,percentOff=%s,country_code=%s,country_name=%s
+                                    set regular_price=%s, discount_price=%s, discount_end=%s,spider_time=%s,percentOff=%s,country_code=%s,country_name=%s,prices=%s
                                 where title=%s
                             ''',
                             [
@@ -79,6 +80,7 @@ class DgPipeline(object):
                                 item.get('title'),
                                 item.get('country_code'),
                                 item.get('country_name'),
+                                item.get('prices')
                             ]
                         )
         self.conn.commit()

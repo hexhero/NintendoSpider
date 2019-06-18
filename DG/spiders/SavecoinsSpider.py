@@ -5,16 +5,20 @@ import scrapy
 import json
 from DG.items import GAME_INFO
 from datetime import datetime, timedelta
+import logging
+from scrapy.utils.log import configure_logging
+
 
 class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
 
     def start_requests(self):
-        for page in range(1,25):
-            yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse)
+        for page in range(1,20): # 25
             yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=nintendo&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse)
+        # for page in range(1,20): # 25    
+        #     yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse)
 
-    def parse(self, response):
+    def parse(self, response): 
         data = json.loads(response.text)
         game_data = data['data']
         for d in game_data:
@@ -47,8 +51,25 @@ class SavecoinsSpider(scrapy.Spider):
                     sc['discountBeginsAt'] = datetime.strptime(discountPrice.get('discountBeginsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z')
                     sc['discountEndsAt'] = datetime.strptime(discountPrice.get('discountEndsAt','2099-01-01T00:00:00.000Z'),'%Y-%m-%dT%H:%M:%S.000Z')
                     sc['percentOff'] = discountPrice['percentOff']
-            yield sc
+            # yield sc
+            if sc['title']:
+                game_name = sc['title'].replace(" ","_").lower()
+                yield scrapy.Request('https://api-savecoins.nznweb.com.br/v1/games/%s/prices?currency=CNY&locale=zh-tw' % d['slug'], callback=self.parse_price,meta={'gameinfo':sc})
 
-                    
-
-           
+    def parse_price(self,response):
+        self.logger.info('Parse function called on %s', response.url)        
+        pj = json.loads(response.text);
+        prices = []
+        for price in pj.digital:
+            prices.append({
+                'country_name':price['country']['name'], # 国家名称
+                'country_code':price['country']['code'], # 国家代码
+                'discount_price':price['currentPrice'], # 折扣价格
+                'discount_price_raw':price['rawCurrentPrice'], # 折扣价格数字
+                'hasDiscount':price['hasDiscount'], # 是否折扣
+                'regular_price':price['regularPrice']['regularPrice'], #原价
+                'regular_price_raw':price['regularPrice']['rawRegularPrice'], #原价数字
+                'status':price['status']
+            })
+        response.meta['gameinfo']['prices'] = json.dumps(prices)
+        yield response.meta['gameinfo']
