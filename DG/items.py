@@ -59,10 +59,11 @@ class GAME_INFO(scrapy.Item):
                 spider_time,
                 percentOff,
                 image_url,
-                data_source
+                data_source,
+                prices
                 )
                 VALUES
-                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         '''
         
         add_data = [
@@ -85,6 +86,7 @@ class GAME_INFO(scrapy.Item):
             item.get('percentOff'),
             item.get('imageUrl'),
             item.get('data_source'),
+            item.get('prices'),
         ]
         return add_sql, add_data
 
