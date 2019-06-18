@@ -71,7 +71,7 @@ class SavecoinsSpider(scrapy.Spider):
                 'regular_price':price['regularPrice']['regularPrice'], #原价
                 'regular_price_raw':price['regularPrice']['rawRegularPrice'], #原价数字
                 # 'status':price['status'],
-                'percentOff':price['discountPrice']['percentOff']
+                'percentOff':price['discountPrice']['percentOff'] # 折扣率
             })
         response.meta['gameinfo']['prices'] = json.dumps(prices)
         yield response.meta['gameinfo']

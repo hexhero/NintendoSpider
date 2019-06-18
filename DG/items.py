@@ -36,7 +36,7 @@ class GAME_INFO(scrapy.Item):
     discountEndsAt = scrapy.Field() # 折扣结束时间
     percentOff = scrapy.Field() # 折扣率
     data_source = scrapy.Field() # 数据来源
-    prices = scrapy.Field() # 所有国家折扣信息
+    prices = scrapy.Field() # 所有国家折扣信息  # 'country_name': '国家名称','country_code':'国家代码','discount_price':'折扣价格','discount_price_raw':'折扣价格数字', 'regular_price':'原价','regular_price_raw':'原价数字','percentOff':'折扣率'
 
     def save(self,item):
         add_sql = '''
