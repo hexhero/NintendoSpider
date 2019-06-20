@@ -20,15 +20,14 @@ class DgPipeline(object):
 
     def process_item(self, item, spider):
         # 将数据存储到GAME_INFO
-        cursor = self.conn.cursor()
-        sql,data = item.save(item)
-        cursor.execute(sql,data)
-        # 更新正式的game表数据
-        self.conn.commit()
-        cursor.close()
+        # cursor = self.conn.cursor()
+        # sql,data = item.save(item)
+        # cursor.execute(sql,data)
+        # self.conn.commit()
+        # cursor.close()
         
         # 将数据更新之 game
-        # self.update_gameinfo(item)
+        self.update_gameinfo(item)
         return item
 
     def update_gameinfo(self, item):

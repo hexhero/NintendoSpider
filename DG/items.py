@@ -40,7 +40,7 @@ class GAME_INFO(scrapy.Item):
 
     def save(self,item):
         add_sql = '''
-            INSERT INTO GAME_INFO (
+            INSERT INTO games (
                 platform,
                 title,
                 title_zh,

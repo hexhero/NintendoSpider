@@ -13,10 +13,10 @@ class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
 
     def start_requests(self):
-        for page in range(1,2): # 20
-            yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=nintendo&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse)
-        # for page in range(1,20): # 25    
-        #     yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse)
+        for page in range(1,20): # 20
+            yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=nintendo&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse,meta={'platform':'switch'})
+        for page in range(1,30): # 25    
+            yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse,meta={'platform':'ps4'})
 
     def parse(self, response): 
         data = json.loads(response.text)
@@ -24,7 +24,8 @@ class SavecoinsSpider(scrapy.Spider):
         for d in game_data:
             sc = GAME_INFO()
             sc['data_source'] = self.name
-            sc['platform'] = d['platform']
+            # sc['platform'] = d['platform']
+            sc['platform'] = response.meta['platform']
             sc['title'] = d['title']
             sc['releaseDateDisplay'] = datetime.strptime(d['releaseDateDisplay'],'%Y-%m-%d')
             sc['imageUrl'] = d['imageUrl']
@@ -53,7 +54,6 @@ class SavecoinsSpider(scrapy.Spider):
                     sc['percentOff'] = discountPrice['percentOff']
             # yield sc
             if sc['title']:
-                game_name = sc['title'].replace(" ","_").lower()
                 yield scrapy.Request('https://api-savecoins.nznweb.com.br/v1/games/%s/prices?currency=CNY&locale=zh-tw' % d['slug'], callback=self.parse_price,meta={'gameinfo':sc})
 
     def parse_price(self,response):

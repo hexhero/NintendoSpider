@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 47.111.99.248
+Source Server         : yhh_game
 Source Server Version : 50643
 Source Host           : 47.111.99.248:3306
 Source Database       : yhh_game
@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50643
 File Encoding         : 65001
 
-Date: 2019-04-28 10:07:26
+Date: 2019-06-20 15:14:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for GAME_INFO
+-- Table structure for games
 -- ----------------------------
-DROP TABLE IF EXISTS `GAME_INFO`;
-CREATE TABLE `GAME_INFO` (
+DROP TABLE IF EXISTS `games`;
+CREATE TABLE `games` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `platform` varchar(32) COLLATE utf8mb4_bin DEFAULT '' COMMENT '平台',
   `title` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '游戏名称',
@@ -27,7 +27,7 @@ CREATE TABLE `GAME_INFO` (
   `release_date` date DEFAULT NULL COMMENT '发行日期',
   `best_price` int(11) DEFAULT NULL COMMENT '是否有优惠',
   `current_price` decimal(16,2) DEFAULT NULL COMMENT '当前价格',
-  `status` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL,
+  `status` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '是否可得到',
   `url_eshop` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '商城链接',
   `discount` int(11) DEFAULT NULL COMMENT '是否有打折',
   `country_code` varchar(8) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '国家代码',
@@ -40,5 +40,6 @@ CREATE TABLE `GAME_INFO` (
   `percentOff` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '折扣率',
   `image_url` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '游戏图片链接',
   `data_source` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '数据来源',
+  `prices` text COLLATE utf8mb4_bin,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1455 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3898 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

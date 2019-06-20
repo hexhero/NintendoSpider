@@ -10,7 +10,7 @@ class JumpSpider(scrapy.Spider):
     name = "jump"
     
     def start_requests(self):
-        for page in range(1,3): # 30
+        for page in range(1,30): # 30
             yield scrapy.Request(url='https://switch.vgjump.com/switch/gameDlc/list?ifDiscount=true&all=true&offset=%d&limit=10' % (page*10), callback=self.parse)
 
     def parse(self, response):
@@ -39,13 +39,13 @@ class JumpSpider(scrapy.Spider):
         prices = []
         for price in info['data']['prices']:
             prices.append({
-                'country_name':price['country'], # 国家名称
-                'country_code':price['coinName'], # 国家代码
-                'discount_price':price['originPrice'], # 折扣价格
-                'discount_price_raw':price['originPrice'], # 折扣价格数字
+                'country_name':price.get('country'), # 国家名称
+                'country_code':price.get('coinName'), # 国家代码
+                'discount_price':price.get('originPrice'), # 折扣价格
+                'discount_price_raw':price.get('originPrice'), # 折扣价格数字
                 # 'hasDiscount':price['hasDiscount'], # 是否折扣
-                'regular_price':price['originPrice'], #原价
-                'regular_price_raw':price['originPrice'], #原价数字
+                'regular_price':price.get('originPrice'), #原价
+                'regular_price_raw':price.get('originPrice'), #原价数字
                 'percentOff':price.get('cutoff')
                 # 'status':price['status']
             })
