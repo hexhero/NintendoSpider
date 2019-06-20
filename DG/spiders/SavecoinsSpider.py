@@ -13,9 +13,9 @@ class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
 
     def start_requests(self):
-        for page in range(1,20): # 20
+        for page in range(1,self.settings['SAVECOINS_SWITCH']): # 20
             yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=nintendo&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse,meta={'platform':'switch'})
-        for page in range(1,30): # 25    
+        for page in range(1,self.settings['SAVECOINS_PS4']): # 30   
             yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse,meta={'platform':'ps4'})
 
     def parse(self, response): 
@@ -71,7 +71,7 @@ class SavecoinsSpider(scrapy.Spider):
                 'regular_price':price['regularPrice']['regularPrice'], #原价
                 'regular_price_raw':price['regularPrice']['rawRegularPrice'], #原价数字
                 # 'status':price['status'],
-                'percentOff':price['discountPrice']['percentOff'] # 折扣率
+                # 'percentOff':price['discountPrice']['percentOff'] # 折扣率
             })
         response.meta['gameinfo']['prices'] = json.dumps(prices)
         yield response.meta['gameinfo']

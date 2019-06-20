@@ -90,3 +90,8 @@ AUTOTHROTTLE_ENABLED = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# 爬取数量
+SAVECOINS_SWITCH = 3#20 #单位:页, 每页20条
+SAVECOINS_PS4 = 3 #30 #单位:页, 每页20条
+JUMP = 3 #30 # 单位:页, 每页10条
