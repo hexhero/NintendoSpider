@@ -49,5 +49,5 @@ class JumpSpider(scrapy.Spider):
                 'percentOff':price.get('cutoff')
                 # 'status':price['status']
             })
-        response.meta['gameinfo']['prices'] = json.dumps(prices)
+        response.meta['gameinfo']['prices'] = json.dumps(prices,ensure_ascii=False)
         yield response.meta['gameinfo']

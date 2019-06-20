@@ -73,5 +73,5 @@ class SavecoinsSpider(scrapy.Spider):
                 # 'status':price['status'],
                 # 'percentOff':price['discountPrice']['percentOff'] # 折扣率
             })
-        response.meta['gameinfo']['prices'] = json.dumps(prices)
+        response.meta['gameinfo']['prices'] = json.dumps(prices, ensure_ascii=False)
         yield response.meta['gameinfo']
