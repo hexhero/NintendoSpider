@@ -13,8 +13,8 @@ class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
 
     def start_requests(self):
-        # for page in range(1,self.settings['SAVECOINS_SWITCH']): # 20
-        #     yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=nintendo&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse,meta={'platform':'switch'})
+        for page in range(1,self.settings['SAVECOINS_SWITCH']): # 20
+            yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=nintendo&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse,meta={'platform':'switch'})
         for page in range(1,self.settings['SAVECOINS_PS4']): # 30   
             yield scrapy.Request(url='https://api-savecoins.nznweb.com.br/v1/games?filter[on_sale]=true&filter[platform]=ps4&locale=zh-tw&order=popularity_desc&page[number]=%d&page[size]=20&currency=CNY' % page,callback=self.parse,meta={'platform':'ps4'})
 
