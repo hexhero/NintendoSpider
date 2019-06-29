@@ -92,6 +92,6 @@ AUTOTHROTTLE_ENABLED = True
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # 爬取数量
-SAVECOINS_SWITCH = 18#20 #单位:页, 每页20条
-SAVECOINS_PS4 = 5 #30 #单位:页, 每页20条
-JUMP = 36 #30 # 单位:页, 每页10条
+SAVECOINS_SWITCH = 20 
+SAVECOINS_PS4 = 5 
+JUMP = 36

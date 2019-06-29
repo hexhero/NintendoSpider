@@ -17,3 +17,4 @@
 * 爬取条件
     1. 特价
     2. `https://switch.vgjump.com/switch/gameDlc/list?ifDiscount=true&all=true&offset=1&limit=10`
+    3. https://switch.vgjump.com/switch/gameInfo?appid=LAgQKXJw61QxIDAA
