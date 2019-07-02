@@ -7,7 +7,7 @@ from DG.items import GAME_INFO
 from datetime import datetime, timedelta
 import logging
 from scrapy.utils.log import configure_logging
-from lib.langconv import Converter
+from .lib.langconv import *
 
 class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
