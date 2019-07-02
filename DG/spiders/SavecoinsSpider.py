@@ -7,7 +7,7 @@ from DG.items import GAME_INFO
 from datetime import datetime, timedelta
 import logging
 from scrapy.utils.log import configure_logging
-
+from lib.langconv import Converter
 
 class SavecoinsSpider(scrapy.Spider):
     name = "savecoins"
@@ -63,7 +63,7 @@ class SavecoinsSpider(scrapy.Spider):
         for priceInfo in pj['digital']:
             price = priceInfo['priceInfo']
             prices.append({
-                'country_name':price['country']['name'], # 国家名称
+                'country_name':Converter('zh-hans').convert(price['country']['name']) if price['country']['name'] else None, # 国家名称
                 'country_code':price['country']['code'], # 国家代码
                 'discount_price':price['currentPrice'], # 折扣价格
                 'discount_price_raw':price['rawCurrentPrice'], # 折扣价格数字
