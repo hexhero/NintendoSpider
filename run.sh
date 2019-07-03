@@ -1,5 +1,5 @@
 #!/bin/env bash
-
+clear
 echo -e "
                    .::::.
                  .::::::::.
