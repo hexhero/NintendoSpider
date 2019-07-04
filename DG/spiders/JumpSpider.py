@@ -44,7 +44,7 @@ class JumpSpider(scrapy.Spider):
                 'discount_price':price.get('price'), # 折扣价格
                 'discount_price_raw':price.get('price'), # 折扣价格数字
                 # 'hasDiscount':price['hasDiscount'], # 是否折扣
-                'regular_price':price.get('originPrice'), #原价
+                'regular_price':'%s %s' % (price.get('coinName'),price.get('originPrice')), #原价
                 'regular_price_raw':price.get('originPrice'), #原价数字
                 'percentOff':price.get('cutoff')
                 # 'status':price['status']
