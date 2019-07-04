@@ -41,8 +41,8 @@ class JumpSpider(scrapy.Spider):
             prices.append({
                 'country_name':price.get('country'), # 国家名称
                 'country_code':price.get('coinName'), # 国家代码
-                'discount_price':price.get('originPrice'), # 折扣价格
-                'discount_price_raw':price.get('originPrice'), # 折扣价格数字
+                'discount_price':price.get('price'), # 折扣价格
+                'discount_price_raw':price.get('price'), # 折扣价格数字
                 # 'hasDiscount':price['hasDiscount'], # 是否折扣
                 'regular_price':price.get('originPrice'), #原价
                 'regular_price_raw':price.get('originPrice'), #原价数字
