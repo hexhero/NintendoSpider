@@ -34,29 +34,28 @@ class DgPipeline(object):
         cursor = self.conn.cursor()
         if item:
             if item['title']:
-                cursor.execute('SELECT count(1) FROM yhh_game.game where title=%s',[item['title']])
+                cursor.execute('SELECT count(1) FROM game where title=%s',[item['title']])
                 count = cursor.fetchone()
                 if count[0] > 0:                   
                     print("-> 更新折扣游戏")
-                    if item.get('rawDiscountPrice'):
-                        cursor.execute(
-                            '''
-                                update yhh_game.game 
-                                    set regular_price=%s, discount_price=%s, discount_end=%s,spider_time=%s,percentOff=%s,country_code=%s,country_name=%s,prices=%s
-                                where title=%s
-                            ''',
-                            [
-                                item.get('rawRegularPrice'),
-                                item.get('rawDiscountPrice'),
-                                item.get('discountEndsAt'),
-                                datetime.now(),
-                                item.get('percentOff'),
-                                item.get('title'),
-                                item.get('country_code'),
-                                item.get('country_name'),
-                                item.get('prices')
-                            ]
-                        )
+                    cursor.execute(
+                        '''
+                            update game 
+                                set regular_price=%s, discount_price=%s, discount_end=%s,spider_time=%s,percentOff=%s,country_code=%s,country_name=%s,prices=%s
+                            where title=%s
+                        ''',
+                        [
+                            item.get('rawRegularPrice'),
+                            item.get('rawDiscountPrice'),
+                            item.get('discountEndsAt'),
+                            datetime.now(),
+                            item.get('percentOff'),
+                            item.get('country_code'),
+                            item.get('country_name'),
+                            item.get('prices'),
+                            item.get('title')
+                        ]
+                    )
                 else:
                     print("-> 新增游戏信息")
                     cursor.execute(''' 
