@@ -28,7 +28,7 @@ Jump小程序和Savecoins网站的游戏折扣信息
     }
 
 ```
-3. 安装依赖,在项目根目录执行
+3. 在项目根目录执行命令,安装依赖.
 ```bash
 pip install -r requirements.txt
 ```
