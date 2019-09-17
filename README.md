@@ -1,20 +1,49 @@
-# 说明文档
+# Switch 游戏销售折扣爬虫
 
-## 环境依赖
-* `scrapy` `datetime` `mysql-conllector` `json`
+> Switch 平台游戏各个地区折扣价格
 
-## 爬虫信息
+Jump小程序和Savecoins网站的游戏折扣信息
 
-* 平台：`https://savecoins.app`
-* 爬取条件：
-    1. 特价模块
-    2. 平台 Switch
-    3. 平台 ps4
-    4. 各1000条
-    5. 更新频率 - 每日
+## 爬虫介绍
+* jump
+* savecoins
 
-* 平台：JUMP
-* 爬取条件
-    1. 特价
-    2. `https://switch.vgjump.com/switch/gameDlc/list?ifDiscount=true&all=true&offset=1&limit=10`
-    3. https://switch.vgjump.com/switch/gameInfo?appid=LAgQKXJw61QxIDAA
+## 目录
+
+[环境安装](#环境安装)
+
+[快速启动](#快速启动)
+
+## 安装
+1. 下载安装Python3.5或以上版本
+2. 安装Mysql数据库并执行[game.sql](game.sql)脚本初始化数据库表.
+3. 在`DG/`目录下[pipelines.py](DG/pipelines.py)文件中修改数据库链接信息.
+```python
+
+    config = {
+        'user': 'xx',  //用户名
+        'password': 'xxx', //密码
+        'host': 'xx.xx.xx.xx', //ip
+        'database': 'xx', //数据库
+        'charset':'utf8mb4'
+    }
+
+```
+3. 安装依赖,在项目根目录执行
+```bash
+pip install -r requirements.txt
+```
+
+## 使用
+
+执行 `run.sh`,启动爬虫.
+
+```bash
+chmod +x ./run.sh && ./run.sh
+``` 
+
+## Maintainers
+[@yangb92](https://github.com/yangb92)
+
+## License
+© 2020 杨斌

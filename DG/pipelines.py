@@ -11,10 +11,10 @@ from datetime import datetime
 class DgPipeline(object):
 
     config = {
-        'user': 'yhh',
-        'password': 'yhh@2019',
-        'host': '47.111.99.248',
-        'database': 'yhh_game',
+        'user': 'xx',
+        'password': 'xxx',
+        'host': 'xx.xx.xx.xx',
+        'database': 'xx',
         'charset':'utf8mb4'
     }
 
