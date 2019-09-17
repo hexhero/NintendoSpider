@@ -1,6 +1,6 @@
-# Switch 游戏销售折扣爬虫 :video_game:
+# Switch 游戏销售折扣爬虫 
 
-> Switch 平台游戏各个地区折扣价格:dolphin:
+> :video_game: Switch 平台游戏各个地区折扣价格
 
 Jump小程序和Savecoins网站的游戏折扣信息
 
@@ -45,4 +45,4 @@ chmod +x ./run.sh && ./run.sh
 [@yangb92](https://github.com/yangb92)
 
 ## License
-© 2020 杨斌
+© 2020 杨斌 :frog:
