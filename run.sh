@@ -24,4 +24,4 @@ echo -e "
 "
 sleep 10
 
-scrapy crawl jump && scrapy crawl savecoins &
+/usr/local/bin/scrapy crawl jump && /usr/local/bin/scrapy crawl savecoins & 
