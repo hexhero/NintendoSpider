@@ -1,6 +1,6 @@
-# Switch 游戏销售折扣爬虫 
+# Nitendo 游戏折扣数据爬虫 
 
-> :video_game: Switch 平台游戏各个地区折扣价格
+> :video_game: 任天堂游戏在各国家的最新折扣,Get Nitendo game discounts for spiders.
 
 Jump小程序和Savecoins网站的游戏折扣信息
 
@@ -20,10 +20,10 @@ Jump小程序和Savecoins网站的游戏折扣信息
 ```python
 
     config = {
-        'user': 'xx',  //用户名
-        'password': 'xxx', //密码
-        'host': 'xx.xx.xx.xx', //ip
-        'database': 'xx', //数据库
+        'user': 'username', 
+        'password': 'pwd', 
+        'host': 'host',
+        'database': 'db',
         'charset':'utf8mb4'
     }
 
